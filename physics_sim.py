@@ -111,6 +111,8 @@ class PhysicsSim():
             V = self.prop_wind_speed[prop_number]
             D = self.propeller_size
             n = rotor_speeds[prop_number]
+            # Is it a bug? should it be: J = V / (n * D) ???
+            # please look at: https://discussions.udacity.com/t/no-progress-on-quadcopter-hover-task-or-mountain-car/665833/5
             J = V / n * D
             # From http://m-selig.ae.illinois.edu/pubs/BrandtSelig-2011-AIAA-2011-1255-LRN-Propellers.pdf
             C_T = max(.12 - .07*max(0, J)-.1*max(0, J)**2, 0)
@@ -128,13 +130,17 @@ class PhysicsSim():
         moments = self.get_moments(thrusts)
 
         self.angular_accels = moments / self.moments_of_inertia
-        angles = self.pose[3:] + self.angular_v * self.dt + 0.5 * self.angular_accels * self.angular_accels * self.dt ** 2
+        # original line:
+        # angles = self.pose[3:] + self.angular_v * self.dt + 0.5 * self.angular_accels * self.angular_accels * self.dt**2
+        # FIXED line: x := x + x'*dt + 0.5*x''*dt*dt
+        angles = self.pose[3:] + self.angular_v * self.dt + 0.5 * self.angular_accels * self.dt * self.dt
         angles = (angles + 2 * np.pi) % (2 * np.pi)
         self.angular_v = self.angular_v + self.angular_accels * self.dt
 
         new_positions = []
         for ii in range(3):
-            if position[ii] <= self.lower_bounds[ii]:
+            # if position[ii] <= self.lower_bounds[ii]:
+            if position[ii] < self.lower_bounds[ii]:
                 new_positions.append(self.lower_bounds[ii])
                 self.done = True
             elif position[ii] > self.upper_bounds[ii]:
