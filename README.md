@@ -1,3 +1,17 @@
+## Udacity Deep Learning Nanodegree project no. 5:
+Teaching a Quadcopter How to Fly using Deep Reinforcement Learning with Keras
+======================================================
+
+The main notebook file for this project is: Quadcopter_Project.ipynb
+
+Additional source code file can be found in task.py, physics_sim_util.py and under the /agents directory
+
+Quadcopter_Project.html is a replica of Quadcopter_Project.ipynb made for offline viewing purpose.
+
+The rest of this readme file was orignated in Udacity and describes how to install and start developing this project.
+
+*********************************************
+
 # Deep RL Quadcopter Controller
 
 *Teach a Quadcopter How to Fly!*
