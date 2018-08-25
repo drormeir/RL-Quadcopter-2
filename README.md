@@ -4,7 +4,7 @@ Teaching a Quadcopter How to Fly using Deep Reinforcement Learning with Keras
 
 I was given a quad-copter physical flight simulator. I had to build a Neural Network that controls the velocity of the 4 rotors of the quad-copter, so it will arrive at its designated target on time without crashing on the ground.
 
-In order to do so, I implemented the Actor-Critic Reinforcement Learning algorithm, I also developed a reward function that takes into consideration the current state of the drone (position, velocity, angular velocity) and converts it to a grade that will be maximized in the reinforcement learning process.
+In order to do so, I implemented the Actor-Critic Reinforcement Learning algorithm, I also developed a reward function that takes into consideration the current state of the drone (position, velocity, angular velocity, target location, etc..) and converts it to a grade that will be maximized in the reinforcement learning process.
 
 The main notebook file for this project is: Quadcopter_Project.ipynb
 
